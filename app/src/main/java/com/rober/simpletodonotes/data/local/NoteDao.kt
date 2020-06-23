@@ -22,8 +22,4 @@ interface NoteDao {
 
     @Query("DELETE FROM $TABLE_NAME")
     suspend fun deleteAllNotes(): Int
-
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.rober.simpletodonotes.ui
+package com.rober.simpletodonotes.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -23,6 +23,5 @@ class MainViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             noteRepository.insertDao(note)
         }
-
     }
 }

@@ -1,5 +1,6 @@
 package com.rober.simpletodonotes.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rober.simpletodonotes.R
 import com.rober.simpletodonotes.databinding.ItemNoteBinding
 import com.rober.simpletodonotes.model.Note
+import com.rober.simpletodonotes.ui.details.TAG
 import com.rober.simpletodonotes.ui.main.viewholder.NoteViewHolder
 
 class NoteRecyclerAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<NoteViewHolder>() {
@@ -29,6 +31,11 @@ class NoteRecyclerAdapter(private val onItemClickListener: OnItemClickListener) 
         items.clear()
         items.addAll(notes)
         notifyDataSetChanged()
+    }
+
+    fun getNote(position: Int): Note{
+        return items[position]
+
     }
 
     override fun getItemCount(): Int = items.size

@@ -9,7 +9,9 @@ import javax.inject.Singleton
 class NotesRepository @Inject constructor(
     val noteDao: NoteDao
 ) {
-    suspend fun insertDao(note:Note) = noteDao.insert(note)
+    suspend fun insert(note:Note) = noteDao.insert(note)
+
+    suspend fun deleteNote(note:Note) = noteDao.delete(note)
 
     fun getAllNotes() = noteDao.getAllNotes()
 }

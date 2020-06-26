@@ -87,9 +87,11 @@ class NoteDetailActivity : BaseActivity<NoteDetailViewModel, ActivityNoteDetailB
         //set save and more in toolbar
     }
 
+    //Instead of creating a new activity, we can just Details and go back to the activities stack.
     private fun goToMainActivity(){
-        val intent = Intent(this@NoteDetailActivity, MainActivity::class.java)
-        startActivity(intent)
+        /*val intent = Intent(this@NoteDetailActivity, MainActivity::class.java)
+        startActivity(intent)*/
+        finish()
     }
 
     override fun getViewBinding(): ActivityNoteDetailBinding = ActivityNoteDetailBinding.inflate(layoutInflater)

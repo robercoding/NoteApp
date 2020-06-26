@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.rober.simpletodonotes.databinding.ActivityMainBinding
 import com.rober.simpletodonotes.model.Note
@@ -30,7 +31,6 @@ NoteRecyclerAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mViewBinding.root)
-        insertNote()
         initNotes()
 
         fab.setOnClickListener {
@@ -50,7 +50,7 @@ NoteRecyclerAdapter.OnItemClickListener {
         })
 
         val simpleItemTouchHelper = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ){
             override fun onMove(
@@ -77,7 +77,7 @@ NoteRecyclerAdapter.OnItemClickListener {
 
     private fun initNotes(){
         mViewBinding.noteRecyclerView.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = mAdapter
         }
 

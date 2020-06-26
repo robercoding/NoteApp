@@ -4,8 +4,9 @@
 
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_24px"
+        android:icon="@drawable/ic_baseline_settings_24"
         app:showAsAction="ifRoom"
+        android:tint="@color/white"
         android:title="Settings"/>
 
 </menu>

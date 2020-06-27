@@ -1,15 +1,19 @@
 package com.rober.simpletodonotes.ui.main
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.rober.simpletodonotes.R
 import com.rober.simpletodonotes.databinding.ActivityMainBinding
 import com.rober.simpletodonotes.model.Note
 import com.rober.simpletodonotes.ui.base.BaseActivity
@@ -25,13 +29,25 @@ import java.util.*
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 NoteRecyclerAdapter.OnItemClickListener {
 
+    private lateinit var appSettingsPrefs : SharedPreferences
+    private lateinit var sharedPrefsEdit : SharedPreferences.Editor
+    private var isNightModeOn: Boolean = false
+
+
     override val mViewModel: MainViewModel by viewModels()
     private val mAdapter: NoteRecyclerAdapter by lazy { NoteRecyclerAdapter(this) }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mViewBinding.root)
+
+        initPreferences()
+        setupAppBar()
+
         initNotes()
+
 
         fab.setOnClickListener {
             goToDetailsActivity()
@@ -74,6 +90,17 @@ NoteRecyclerAdapter.OnItemClickListener {
         }
     }
 
+    private fun initPreferences(){
+        appSettingsPrefs = getSharedPreferences("AppSettingPrefs", 0)
+        sharedPrefsEdit = appSettingsPrefs.edit()
+        isNightModeOn = appSettingsPrefs.getBoolean("NightMode", false)
+
+        if(isNightModeOn){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
 
     private fun initNotes(){
         mViewBinding.noteRecyclerView.apply {
@@ -87,10 +114,27 @@ NoteRecyclerAdapter.OnItemClickListener {
         })
     }
 
-    private fun insertNote(){
-        mViewModel.insertNote(Note(0,"Titulo0", "Hola0", Date()))
-        mViewModel.insertNote(Note(1,"Titulo1", "Hola1", Date()))
+    private fun setupAppBar(){
+        mViewBinding.mainToolbar.setOnMenuItemClickListener {menuItem->
+            when(menuItem.itemId) {
+                R.id.bulb -> {
+                    if(isNightModeOn){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        sharedPrefsEdit.putBoolean("NightMode", false)
+                        sharedPrefsEdit.apply()
+                    }else{
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        sharedPrefsEdit.putBoolean("NightMode", true)
+                        sharedPrefsEdit.apply()
+                    }
+                    true
+                }
+                else -> true
+            }
+
+        }
     }
+
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 

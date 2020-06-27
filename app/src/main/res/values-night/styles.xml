@@ -15,12 +15,8 @@
         <item name="cardBackgroundColor">@color/background</item>
     </style>
 
-    <style name="NavigationStyle">
-        <item name="android:textColorSecondary">@color/white</item>
-    </style>
-
-    <style name="CustomActionBar">
-        <item name="background">@drawable/shape_toolbar</item>
+    <style name="NavigationWhite">
+        <item name="android:textColorSecondary">@color/colorHint</item>
     </style>
 
 </resources>

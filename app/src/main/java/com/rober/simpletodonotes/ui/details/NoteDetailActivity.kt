@@ -66,13 +66,11 @@ class NoteDetailActivity : BaseActivity<NoteDetailViewModel, ActivityNoteDetailB
     }
 
     private fun setupAppBar(){
-        detailToolbar.setNavigationOnClickListener {
-            val intent = Intent(this@NoteDetailActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        mViewBinding.detailToolbar.setNavigationOnClickListener {
+            goToMainActivity()
         }
 
-        detailToolbar.setOnMenuItemClickListener { menuItem->
+        mViewBinding.detailToolbar.setOnMenuItemClickListener { menuItem->
             when(menuItem.itemId){
                 R.id.save -> {
                     mViewModel.saveNote()
@@ -89,8 +87,9 @@ class NoteDetailActivity : BaseActivity<NoteDetailViewModel, ActivityNoteDetailB
 
     //Instead of creating a new activity, we can just Details and go back to the activities stack.
     private fun goToMainActivity(){
-        /*val intent = Intent(this@NoteDetailActivity, MainActivity::class.java)
-        startActivity(intent)*/
+        val intent = Intent(this@NoteDetailActivity, MainActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         finish()
     }
 

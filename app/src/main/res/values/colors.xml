@@ -6,23 +6,26 @@
 
     <!--Color resources app-->
     <color name="background">#FFFFFF</color>
-    <color name="outlineCard">#D3D3D3</color>
+    <color name="strokeCard">#D3D3D3</color>
+    <color name="strokeCardSelected">@color/black</color>
     <color name="colorHint">#9D9D9D</color>
     <color name="textColor">#000000</color>
     <color name="toolbarColor">#FFFFFF</color>
 
-
     <!-- Icon colors-->
-    <color name="iconSettingsColor">#000000</color>
-    <color name="iconSaveColor">#000000</color>
-    <color name="iconClearColor">#000000</color>
-    <color name="iconAddColor">#000000</color>
-    <color name="iconArrowBackColor">#000000</color>
-    <color name="iconBulb">#000000</color>
-
+    <color name="iconSettingsColor">@color/black</color>
+    <color name="iconSaveColor">@color/black</color>
+    <color name="iconClearColor">@color/black</color>
+    <color name="iconAddColor">@color/black</color>
+    <color name="iconArrowBackColor">@color/black</color>
+    <color name="iconBulb">@color/black</color>
+    <color name="iconDelete">@color/black</color>
 
     <!--colors-->
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="grayIcon">#9d9d9d</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="google">#363640</color>
 
 </resources>

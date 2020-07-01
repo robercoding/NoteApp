@@ -10,7 +10,7 @@
     <style name="CardNote">
         <item name="cardElevation">4dp</item>
         <item name="cardCornerRadius">8dp</item>
-        <item name="strokeColor">@color/outlineCard</item>
+        <item name="strokeColor">@color/strokeCard</item>
         <item name="strokeWidth">1dp</item>
         <item name="cardBackgroundColor">@color/background</item>
     </style>

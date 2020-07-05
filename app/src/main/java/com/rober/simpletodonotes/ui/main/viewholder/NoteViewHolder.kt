@@ -51,8 +51,8 @@ class NoteViewHolder(
                 if(notes!=null){
                     if(notes.contains(item)){
                         itemCardView.apply{
-                            //changeStrokeColor(R.color.strokeCardSelected)
-                            //changeStrokeWidth(5)
+                            changeStrokeColor(R.color.strokeCardSelected)
+                            changeStrokeWidth(5)
                         }
                     }else{
                         itemCardView.apply {

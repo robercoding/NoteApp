@@ -77,10 +77,13 @@ class MainViewModel @ViewModelInject constructor(
                 if(id > 0){
                     deletedNotes.add(note)
                 }
-                //addOrRemoveNoteFromSelectedList(note) BUG
+                //addOrRemoveNoteFromSelectedList(note) //BUG
             }
             if(deletedNotes.size > 0){
                 _eventNotes.value = Event.Delete("${deletedNotes.size} notes has been deleted", deletedNotes)
+                if(deletedNotes.size == noteInteractionManager.getSelectedNotes().size){
+                    noteInteractionManager.clearSelectedNotes() //clear all selected notes (Patch to the bug)
+                }
             }
         }
 

@@ -58,6 +58,7 @@ NoteRecyclerAdapter.Interaction, ItemTouchHelperAdapter {
 
         val simpleItemTouchHelper = NoteItemTouchHelperCallback(this)
 
+        //Simple callback
         /*object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -190,34 +191,26 @@ NoteRecyclerAdapter.Interaction, ItemTouchHelperAdapter {
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun onItemMove(fromPosition: Int, toPosition: Int, viewHolder: RecyclerView.ViewHolder, isDropped: Boolean) {
+    override fun onItemMove(fromPosition: Int, toPosition: Int, viewHolder: RecyclerView.ViewHolder) {
         val noteList = mAdapter?.getNoteList()
         val note = noteList?.get(fromPosition)
         if(note!=null){
-            noteList.removeAt(fromPosition)
-            noteList.add(toPosition, note)
 
             if(mViewModel.isNoteSelected(note)){
-                Log.i(TAG,"Now removing")
+                Log.i(TAG,"Removing note")
                 mViewModel.addOrRemoveNoteFromSelectedList(note)
             }
 
-            Log.i(TAG, "Change position")
-            Log.i(TAG, "Is dropped= $isDropped")
-            if(!isDropped){
-                /*viewHolder.itemView.itemCardView.apply {
-                    changeStrokeColor(R.color.yellow)
-                    changeStrokeWidth(5)
-                    Log.i(TAG, "Change UI card")
-                }*/
-            }else{
-              /*  viewHolder.itemView.itemCardView.apply {
-                    changeStrokeColor(R.color.strokeCard)
-                    changeStrokeWidth(2)
-                    Log.i(TAG, "Change UI card")
-                }*/
-            }
+            noteList.removeAt(fromPosition)
+            noteList.add(toPosition, note)
 
+            Log.i(TAG, "Change position")
+            Log.i(TAG, "Color= ${viewHolder.itemView.itemCardView.strokeColor}")
+                viewHolder.itemView.itemCardView.apply {
+                    //changeStrokeColor(R.color.strokeCardSelected)
+                    //changeStrokeWidth(5)
+                    Log.i(TAG, "Change UI card")
+                }
         }
         mAdapter?.notifyItemMoved(fromPosition, toPosition)
     }

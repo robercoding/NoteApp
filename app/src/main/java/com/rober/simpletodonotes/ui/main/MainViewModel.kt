@@ -41,6 +41,8 @@ class MainViewModel @ViewModelInject constructor(
     fun isMultiSelectionActivated() =
         noteInteractionManager.isMultiSelectionActivated()
 
+    fun isNoteSelected(note: Note) = noteInteractionManager.isNoteSelected(note)
+
     fun addOrRemoveNoteFromSelectedList(note: Note){
         noteInteractionManager.addOrRemoveNoteFromSelectedList(note)
     }

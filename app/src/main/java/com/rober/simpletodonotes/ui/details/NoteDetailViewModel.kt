@@ -1,7 +1,5 @@
 package com.rober.simpletodonotes.ui.details
 
-import android.util.Log
-import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
@@ -9,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.material.snackbar.Snackbar
 import com.rober.simpletodonotes.data.repository.NotesRepository
 import com.rober.simpletodonotes.model.Note
 import com.rober.simpletodonotes.util.Event

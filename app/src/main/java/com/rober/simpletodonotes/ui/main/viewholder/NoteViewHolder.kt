@@ -33,14 +33,17 @@ class NoteViewHolder(
             executePendingBindings()
 
             interaction?.let {interaction->
-                binding.root.setOnClickListener {
-                    interaction.onItemClick(item)
-                }
+                binding.root.apply {
 
-                binding.root.setOnLongClickListener {
-                    interaction.activateMultiSelectItem()
-                    interaction.onItemClick(item)
-                    true
+                    setOnClickListener {
+                        interaction.onItemClick(item)
+                    }
+
+                    setOnLongClickListener {
+                        interaction.activateMultiSelectItem()
+                        interaction.onItemClick(item)
+                        true
+                    }
                 }
             }
 
@@ -48,8 +51,8 @@ class NoteViewHolder(
                 if(notes!=null){
                     if(notes.contains(item)){
                         itemCardView.apply{
-                            changeStrokeColor(R.color.strokeCardSelected)
-                            changeStrokeWidth(5)
+                            //changeStrokeColor(R.color.strokeCardSelected)
+                            //changeStrokeWidth(5)
                         }
                     }else{
                         itemCardView.apply {

@@ -28,6 +28,6 @@
     <color name="grayIcon">#9d9d9d</color>
     <color name="yellow">#FFFF00</color>
     <color name="google">#363640</color>
-
-
+    <color name="red">#FF0000</color>
+    <color name="fuchsia">#FF00FF</color>
 </resources>

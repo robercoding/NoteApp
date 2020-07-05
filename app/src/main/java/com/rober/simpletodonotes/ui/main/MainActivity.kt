@@ -18,23 +18,28 @@ import com.rober.simpletodonotes.R
 import com.rober.simpletodonotes.databinding.ActivityMainBinding
 import com.rober.simpletodonotes.model.Note
 import com.rober.simpletodonotes.ui.base.BaseActivity
+import com.rober.simpletodonotes.ui.common.changeStrokeColor
+import com.rober.simpletodonotes.ui.common.changeStrokeWidth
 import com.rober.simpletodonotes.ui.main.adapter.NoteRecyclerAdapter
 import com.rober.simpletodonotes.ui.details.NoteDetailActivity
 import com.rober.simpletodonotes.ui.main.state.NoteToolbarState
 import com.rober.simpletodonotes.util.Event
+import com.rober.simpletodonotes.util.ItemTouchHelperAdapter
 
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_note.view.*
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
-NoteRecyclerAdapter.Interaction {
+NoteRecyclerAdapter.Interaction, ItemTouchHelperAdapter {
 
     private lateinit var appSettingsPrefs : SharedPreferences
     private lateinit var sharedPrefsEdit : SharedPreferences.Editor
     private var isNightModeOn: Boolean = false
 
     override val mViewModel: MainViewModel by viewModels()
+
     private var mAdapter: NoteRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +56,9 @@ NoteRecyclerAdapter.Interaction {
             goToDetailsActivity()
         }
 
+        val simpleItemTouchHelper = NoteItemTouchHelperCallback(this)
 
-
-        val simpleItemTouchHelper = object : ItemTouchHelper.SimpleCallback(
+        /*object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ){
@@ -70,7 +75,7 @@ NoteRecyclerAdapter.Interaction {
                 val note = mAdapter!!.getNote(holderPosition)
                 mViewModel.deleteNote(note)
             }
-        }
+        }*/
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchHelper)
         itemTouchHelper.apply {
@@ -176,6 +181,45 @@ NoteRecyclerAdapter.Interaction {
             Log.i("MainActivty", list.toString())
         })
 
+    }
+
+    override fun onItemSwiped(position: Int) {
+        mAdapter?.getNote(position)?.let {note ->
+            mViewModel.deleteNote(note)
+        }
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int, viewHolder: RecyclerView.ViewHolder, isDropped: Boolean) {
+        val noteList = mAdapter?.getNoteList()
+        val note = noteList?.get(fromPosition)
+        if(note!=null){
+            noteList.removeAt(fromPosition)
+            noteList.add(toPosition, note)
+
+            if(mViewModel.isNoteSelected(note)){
+                Log.i(TAG,"Now removing")
+                mViewModel.addOrRemoveNoteFromSelectedList(note)
+            }
+
+            Log.i(TAG, "Change position")
+            Log.i(TAG, "Is dropped= $isDropped")
+            if(!isDropped){
+                /*viewHolder.itemView.itemCardView.apply {
+                    changeStrokeColor(R.color.yellow)
+                    changeStrokeWidth(5)
+                    Log.i(TAG, "Change UI card")
+                }*/
+            }else{
+              /*  viewHolder.itemView.itemCardView.apply {
+                    changeStrokeColor(R.color.strokeCard)
+                    changeStrokeWidth(2)
+                    Log.i(TAG, "Change UI card")
+                }*/
+            }
+
+        }
+        mAdapter?.notifyItemMoved(fromPosition, toPosition)
     }
 
     override fun isMultiSelectionStateActivated() = mViewModel.isMultiSelectionActivated()

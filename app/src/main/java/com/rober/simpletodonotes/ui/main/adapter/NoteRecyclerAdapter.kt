@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rober.simpletodonotes.R
 import com.rober.simpletodonotes.databinding.ItemNoteBinding
 import com.rober.simpletodonotes.model.Note
-import com.rober.simpletodonotes.ui.details.TAG
 import com.rober.simpletodonotes.ui.main.viewholder.NoteViewHolder
 
 class NoteRecyclerAdapter(
@@ -39,9 +38,10 @@ class NoteRecyclerAdapter(
         notifyDataSetChanged()
     }
 
+    fun getNoteList(): MutableList<Note> = items
+
     fun getNote(position: Int): Note{
         return items[position]
-
     }
 
     override fun getItemCount(): Int = items.size

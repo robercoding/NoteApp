@@ -28,6 +28,17 @@ class NoteInteractionManager {
         return toolbarState.value.toString() == NoteToolbarState.MultiSelectionState().toString()
     }
 
+    fun isNoteSelected(note: Note): Boolean{
+        val list = _selectedNotes.value
+        if(list!=null){
+            if(list.contains(note)){
+                return true
+            }
+            return false
+        }
+        return false
+    }
+
     fun addOrRemoveNoteFromSelectedList(note:Note) {
         var list = _selectedNotes.value
         if(list == null){

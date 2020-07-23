@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class NotesRepository @Inject constructor(
-    val noteDao: NoteDao
+    private val noteDao: NoteDao
 ) {
     suspend fun insert(note:Note) = noteDao.insert(note)
 

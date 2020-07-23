@@ -11,6 +11,8 @@
     <color name="colorHint">#9D9D9D</color>
     <color name="textColor">@color/white</color>
     <color name="toolbarColor">#2F4F4F</color>
+    <color name="fabBackground">#FF424242</color>
+
 
     <!-- Icon colors-->
     <color name="iconSettingsColor">@color/colorHint</color>

@@ -164,7 +164,7 @@ NoteRecyclerAdapter.Interaction, ItemTouchHelperAdapter {
         mViewModel.eventNotes.observe(this@MainActivity, Observer {event ->
             when(event) {
                 is Event.Delete -> {
-                    Snackbar.make(mViewBinding.root, "${event.message}", 5000).apply {
+                    Snackbar.make(mViewBinding.root, "${event.message}", 3000).apply {
                         setAction("Undo"){
                             val notes = event.data!!
                             for (note in notes){
@@ -205,7 +205,6 @@ NoteRecyclerAdapter.Interaction, ItemTouchHelperAdapter {
             noteList.add(toPosition, note)
 
             Log.i(TAG, "Change position")
-            Log.i(TAG, "Color= ${viewHolder.itemView.itemCardView.strokeColor}")
                 viewHolder.itemView.itemCardView.apply {
                     //changeStrokeColor(R.color.strokeCardSelected)
                     //changeStrokeWidth(5)

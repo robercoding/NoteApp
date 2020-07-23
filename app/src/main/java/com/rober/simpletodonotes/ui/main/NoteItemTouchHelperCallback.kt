@@ -45,8 +45,8 @@ class NoteItemTouchHelperCallback(
         Log.i(TAG, "ACTION STATE= $actionState")
         if(actionState == ItemTouchHelper.ACTION_STATE_DRAG){
             viewHolder?.itemView?.itemCardView?.apply {
-                changeStrokeColor(R.color.strokeCardSelected)
-                changeStrokeWidth(5)
+                //changeStrokeColor(R.color.strokeCardSelected)
+                //changeStrokeWidth(5)
             }
         }
         if(actionState == ItemTouchHelper.ACTION_STATE_IDLE){

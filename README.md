@@ -15,7 +15,7 @@ SimpleToDoNotes is my first project built by myself using the knowledge that acq
 
 | Create note  | Update a note | Swipe delete  
 |---|---|---|
-| <img src="demo/create.gif"/>  |  <img src="demo/update.gif" width="200" height="400"/> |  <img src="demo/swipe.gif" width="190" height="380"/> |
+| <img src="demo/create.gif" width="200" height="400"/>  |  <img src="demo/update.gif" width="200" height="400"/> |  <img src="demo/swipe.gif" width="190" height="380"/> |
 
 
 
